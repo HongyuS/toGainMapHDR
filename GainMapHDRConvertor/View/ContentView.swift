@@ -26,18 +26,17 @@ struct ContentView: View {
         } detail: {
             // 右侧：参数配置
             ParameterConfigView(
-                conversionOptions: conversionOptions,
-                selectedFile: fileCollection.selectedItem
+                conversionOptions: conversionOptions
             )
         }
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
-                Button("转换当前文件") {
+                Button("转换当前文件", systemImage: "play.fill") {
                     convertSelectedFile()
                 }
                 .disabled(fileCollection.selectedItem == nil || isConverting)
                 
-                Button("批量转换") {
+                Button("批量转换", systemImage: "forward.fill") {
                     convertAllFiles()
                 }
                 .disabled(!fileCollection.hasItems || isConverting)
@@ -146,5 +145,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .frame(width: 1200, height: 800)
+        .frame(width: 800, height: 600)
 }

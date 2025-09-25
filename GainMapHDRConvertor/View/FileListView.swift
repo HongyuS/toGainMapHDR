@@ -14,24 +14,6 @@ struct FileListView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // 标题栏
-            HStack {
-                Text("文件列表")
-                    .font(.headline)
-                    .foregroundColor(.primary)
-                
-                Spacer()
-                
-                Text("\(fileCollection.items.count) 个文件")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .background(Color(.controlBackgroundColor))
-            
-            Divider()
-            
             // 文件列表
             if fileCollection.hasItems {
                 List(fileCollection.items, id: \.id, selection: Binding(
@@ -50,7 +32,7 @@ struct FileListView: View {
                             FileContextMenu(item: item, fileCollection: fileCollection)
                         }
                 }
-                .listStyle(PlainListStyle())
+                .listStyle(.sidebar)
             } else {
                 // 空状态
                 EmptyStateView(onAddFiles: {
@@ -58,27 +40,41 @@ struct FileListView: View {
                 })
             }
             
-            Divider()
-            
             // 底部工具栏
             HStack {
-                Button("添加文件") {
-                    showingFileImporter = true
+                if #available(macOS 26.0, *) {
+                    Button("添加文件", systemImage: "plus") {
+                        showingFileImporter = true
+                    }
+                    .buttonStyle(.glass)
+                } else {
+                    // Fallback on earlier versions
+                    Button("添加文件", systemImage: "plus") {
+                        showingFileImporter = true
+                    }
+                    .buttonStyle(.borderless)
                 }
-                .buttonStyle(.bordered)
                 
                 Spacer()
                 
                 if fileCollection.hasItems {
-                    Button("清空列表") {
-                        fileCollection.removeAll()
+                    if #available(macOS 26.0, *) {
+                        Button("清空列表", systemImage: "trash") {
+                            fileCollection.removeAll()
+                        }
+                        .buttonStyle(.glass)
+                    } else {
+                        // Fallback on earlier versions
+                        Button("清空列表", systemImage: "trash") {
+                            fileCollection.removeAll()
+                        }
+                        .buttonStyle(.borderless)
                     }
-                    .buttonStyle(.bordered)
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
-            .background(Color(.controlBackgroundColor))
+            .padding(.top, 8)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
         }
         .frame(minWidth: 300, idealWidth: 350)
         .fileImporter(
@@ -181,7 +177,7 @@ struct FileRowView: View {
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 4)
-        .contentShape(Rectangle())
+        .contentShape(.containerRelative)
     }
 }
 

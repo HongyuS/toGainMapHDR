@@ -18,9 +18,9 @@ enum ExportFormat {
     case rgbGainMap     // -b: RGB gain map with base image
     case appleType1     // -g: Apple gain map by CIFilter
     case appleType2     // -a: Apple gain map from ISO gain map
-    case sdr           // -s: SDR only
-    case pqHDR         // -p: PQ HDR
-    case hlgHDR        // -h: HLG HDR
+    case sdr            // -s: SDR only
+    case pqHDR          // -p: PQ HDR
+    case hlgHDR         // -h: HLG HDR
 }
 
 enum ColorSpace {
@@ -103,15 +103,15 @@ enum FileFormat {
 
 // MARK: - Conversion Options
 struct ConversionOptions: Equatable {
-    var imageQuality: Double = 0.85           // -q: 图像质量 (0.0-1.0)
-    var toneMappingRatio: Float = 0.2         // -r: 色调映射比例 (0.0-1.0)
+    var imageQuality: Double = 0.99            // -q: 图像质量 (0.0-1.0)
+    var toneMappingRatio: Float = 0.0          // -r: 色调映射比例 (0.0-1.0)
     var exportFormat: ExportFormat = .adaptive // 导出格式
-    var colorSpace: ColorSpace = .auto        // -c: 色彩空间
-    var colorDepth: ColorDepth = .eightBit    // -d: 色彩深度
-    var fileFormat: FileFormat = .heic        // -j: 文件格式
-    var scalingRatio: Float = 1.0             // -H: 增益图缩放 (1.0-2.0)
-    var additionalText: String = ""           // -t: 附加文本
-    var baseImageURL: URL?                    // -b: 基础图像URL
+    var colorSpace: ColorSpace = .auto         // -c: 色彩空间
+    var colorDepth: ColorDepth = .eightBit     // -d: 色彩深度
+    var fileFormat: FileFormat = .jpeg         // -j: 文件格式
+    var scalingRatio: Float = 1.0              // -H: 增益图缩放 (1.0-2.0)
+    var additionalText: String = ""            // -t: 附加文本
+    var baseImageURL: URL?                     // -b: 基础图像URL
     
     var isHalfSize: Bool {
         return scalingRatio > 1.0
