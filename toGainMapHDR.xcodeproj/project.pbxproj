@@ -35,7 +35,50 @@
 			runOncePerArchitecture = 0;
 			script = "# Type a script or drag a script file from your workspace to insert its path.\nxcrun metallib -cikernel \"${INPUT_FILE_PATH}\" -o \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 		};
+		ECE38B4B2E857A04009CE6D7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = sourcecode.metal;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/${INPUT_FILE_BASE}.air",
+			);
+			runOncePerArchitecture = 0;
+			script = "# metal\nxcrun metal -c -fcikernel \"${INPUT_FILE_PATH}\" -o \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+		};
+		ECE38B4C2E857A5D009CE6D7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = compiled.air;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+				"$(METAL_LIBRARY_OUTPUT_DIR)/$(INPUT_FILE_BASE).metallib",
+			);
+			runOncePerArchitecture = 0;
+			script = "# metal\nxcrun metallib -cikernel \"${INPUT_FILE_PATH}\" -o \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+		};
 /* End PBXBuildRule section */
+
+/* Begin PBXContainerItemProxy section */
+		ECE38AE52E853A88009CE6D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 09AE6D8A2CA6D3B40032A81C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECE38AD42E853A87009CE6D7;
+			remoteInfo = GainMapHDRConvertor;
+		};
+		ECE38AEF2E853A88009CE6D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 09AE6D8A2CA6D3B40032A81C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECE38AD42E853A87009CE6D7;
+			remoteInfo = GainMapHDRConvertor;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		09AE6D902CA6D3B40032A81C /* CopyFiles */ = {
@@ -51,18 +94,98 @@
 
 /* Begin PBXFileReference section */
 		09AE6D922CA6D3B40032A81C /* toGainMapHDR */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = toGainMapHDR; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECE38AD52E853A87009CE6D7 /* GainMapHDRConvertor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GainMapHDRConvertor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECE38AE42E853A88009CE6D7 /* GainMapHDRConvertorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GainMapHDRConvertorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECE38AEE2E853A88009CE6D7 /* GainMapHDRConvertorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GainMapHDRConvertorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		ECE38AFC2E853A88009CE6D7 /* Exceptions for "GainMapHDRConvertor" folder in "GainMapHDRConvertor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ECE38AD42E853A87009CE6D7 /* GainMapHDRConvertor */;
+		};
+		ECE38B022E853B46009CE6D7 /* Exceptions for "toGainMapHDR" folder in "GainMapHDRConvertor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CustomFilter/GainMapFilter.swift,
+				CustomFilter/GainMapKernel.ci.metal,
+			);
+			target = ECE38AD42E853A87009CE6D7 /* GainMapHDRConvertor */;
+		};
+		ECE38B032E853B46009CE6D7 /* Exceptions for "toGainMapHDR" folder in "GainMapHDRConvertorTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CustomFilter/GainMapFilter.swift,
+				CustomFilter/GainMapKernel.ci.metal,
+			);
+			target = ECE38AE32E853A88009CE6D7 /* GainMapHDRConvertorTests */;
+		};
+		ECE38B0C2E853D62009CE6D7 /* Exceptions for "GainMapHDRConvertor" folder in "GainMapHDRConvertorTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/Convertor.swift,
+			);
+			target = ECE38AE32E853A88009CE6D7 /* GainMapHDRConvertorTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		09AE6D942CA6D3B40032A81C /* toGainMapHDR */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ECE38B022E853B46009CE6D7 /* Exceptions for "toGainMapHDR" folder in "GainMapHDRConvertor" target */,
+				ECE38B032E853B46009CE6D7 /* Exceptions for "toGainMapHDR" folder in "GainMapHDRConvertorTests" target */,
+			);
 			path = toGainMapHDR;
+			sourceTree = "<group>";
+		};
+		ECE38AD62E853A87009CE6D7 /* GainMapHDRConvertor */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ECE38AFC2E853A88009CE6D7 /* Exceptions for "GainMapHDRConvertor" folder in "GainMapHDRConvertor" target */,
+				ECE38B0C2E853D62009CE6D7 /* Exceptions for "GainMapHDRConvertor" folder in "GainMapHDRConvertorTests" target */,
+			);
+			path = GainMapHDRConvertor;
+			sourceTree = "<group>";
+		};
+		ECE38AE72E853A88009CE6D7 /* GainMapHDRConvertorTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GainMapHDRConvertorTests;
+			sourceTree = "<group>";
+		};
+		ECE38AF12E853A88009CE6D7 /* GainMapHDRConvertorUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GainMapHDRConvertorUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		09AE6D8F2CA6D3B40032A81C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECE38AD22E853A87009CE6D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECE38AE12E853A88009CE6D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECE38AEB2E853A88009CE6D7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,6 +199,9 @@
 			isa = PBXGroup;
 			children = (
 				09AE6D942CA6D3B40032A81C /* toGainMapHDR */,
+				ECE38AD62E853A87009CE6D7 /* GainMapHDRConvertor */,
+				ECE38AE72E853A88009CE6D7 /* GainMapHDRConvertorTests */,
+				ECE38AF12E853A88009CE6D7 /* GainMapHDRConvertorUITests */,
 				09AE6D932CA6D3B40032A81C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,6 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				09AE6D922CA6D3B40032A81C /* toGainMapHDR */,
+				ECE38AD52E853A87009CE6D7 /* GainMapHDRConvertor.app */,
+				ECE38AE42E853A88009CE6D7 /* GainMapHDRConvertorTests.xctest */,
+				ECE38AEE2E853A88009CE6D7 /* GainMapHDRConvertorUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +244,76 @@
 			productReference = 09AE6D922CA6D3B40032A81C /* toGainMapHDR */;
 			productType = "com.apple.product-type.tool";
 		};
+		ECE38AD42E853A87009CE6D7 /* GainMapHDRConvertor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECE38AFD2E853A88009CE6D7 /* Build configuration list for PBXNativeTarget "GainMapHDRConvertor" */;
+			buildPhases = (
+				ECE38AD12E853A87009CE6D7 /* Sources */,
+				ECE38AD22E853A87009CE6D7 /* Frameworks */,
+				ECE38AD32E853A87009CE6D7 /* Resources */,
+			);
+			buildRules = (
+				ECE38B4C2E857A5D009CE6D7 /* PBXBuildRule */,
+				ECE38B4B2E857A04009CE6D7 /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				ECE38AD62E853A87009CE6D7 /* GainMapHDRConvertor */,
+			);
+			name = GainMapHDRConvertor;
+			packageProductDependencies = (
+			);
+			productName = GainMapHDRConvertor;
+			productReference = ECE38AD52E853A87009CE6D7 /* GainMapHDRConvertor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ECE38AE32E853A88009CE6D7 /* GainMapHDRConvertorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECE38AFE2E853A88009CE6D7 /* Build configuration list for PBXNativeTarget "GainMapHDRConvertorTests" */;
+			buildPhases = (
+				ECE38AE02E853A88009CE6D7 /* Sources */,
+				ECE38AE12E853A88009CE6D7 /* Frameworks */,
+				ECE38AE22E853A88009CE6D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ECE38AE62E853A88009CE6D7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				ECE38AE72E853A88009CE6D7 /* GainMapHDRConvertorTests */,
+			);
+			name = GainMapHDRConvertorTests;
+			packageProductDependencies = (
+			);
+			productName = GainMapHDRConvertorTests;
+			productReference = ECE38AE42E853A88009CE6D7 /* GainMapHDRConvertorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ECE38AED2E853A88009CE6D7 /* GainMapHDRConvertorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECE38AFF2E853A88009CE6D7 /* Build configuration list for PBXNativeTarget "GainMapHDRConvertorUITests" */;
+			buildPhases = (
+				ECE38AEA2E853A88009CE6D7 /* Sources */,
+				ECE38AEB2E853A88009CE6D7 /* Frameworks */,
+				ECE38AEC2E853A88009CE6D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ECE38AF02E853A88009CE6D7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				ECE38AF12E853A88009CE6D7 /* GainMapHDRConvertorUITests */,
+			);
+			name = GainMapHDRConvertorUITests;
+			packageProductDependencies = (
+			);
+			productName = GainMapHDRConvertorUITests;
+			productReference = ECE38AEE2E853A88009CE6D7 /* GainMapHDRConvertorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -122,12 +321,23 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					09AE6D912CA6D3B40032A81C = {
 						CreatedOnToolsVersion = 16.0;
 						LastSwiftMigration = 1610;
+					};
+					ECE38AD42E853A87009CE6D7 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					ECE38AE32E853A88009CE6D7 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = ECE38AD42E853A87009CE6D7;
+					};
+					ECE38AED2E853A88009CE6D7 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = ECE38AD42E853A87009CE6D7;
 					};
 				};
 			};
@@ -146,9 +356,36 @@
 			projectRoot = "";
 			targets = (
 				09AE6D912CA6D3B40032A81C /* toGainMapHDR */,
+				ECE38AD42E853A87009CE6D7 /* GainMapHDRConvertor */,
+				ECE38AE32E853A88009CE6D7 /* GainMapHDRConvertorTests */,
+				ECE38AED2E853A88009CE6D7 /* GainMapHDRConvertorUITests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ECE38AD32E853A87009CE6D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECE38AE22E853A88009CE6D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECE38AEC2E853A88009CE6D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		09AE6D8E2CA6D3B40032A81C /* Sources */ = {
@@ -158,7 +395,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ECE38AD12E853A87009CE6D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECE38AE02E853A88009CE6D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECE38AEA2E853A88009CE6D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ECE38AE62E853A88009CE6D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECE38AD42E853A87009CE6D7 /* GainMapHDRConvertor */;
+			targetProxy = ECE38AE52E853A88009CE6D7 /* PBXContainerItemProxy */;
+		};
+		ECE38AF02E853A88009CE6D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECE38AD42E853A87009CE6D7 /* GainMapHDRConvertor */;
+			targetProxy = ECE38AEF2E853A88009CE6D7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		09AE6D972CA6D3B40032A81C /* Debug */ = {
@@ -308,6 +579,206 @@
 			};
 			name = Release;
 		};
+		ECE38AF62E853A88009CE6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T84X5VQX2Z;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GainMapHDRConvertor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "GainMap HDR Convertor";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				"INFOPLIST_KEY_UISupportsDocumentBrowser[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UISupportsDocumentBrowser[sdk=iphonesimulator*]" = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
+				MARKETING_VERSION = 3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = HyS.GainMapHDRConvertor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		ECE38AF72E853A88009CE6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T84X5VQX2Z;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GainMapHDRConvertor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "GainMap HDR Convertor";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				"INFOPLIST_KEY_UISupportsDocumentBrowser[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UISupportsDocumentBrowser[sdk=iphonesimulator*]" = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
+				MARKETING_VERSION = 3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = HyS.GainMapHDRConvertor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		ECE38AF82E853A88009CE6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T84X5VQX2Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = HyS.GainMapHDRConvertorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GainMapHDRConvertor.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GainMapHDRConvertor";
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		ECE38AF92E853A88009CE6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T84X5VQX2Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = HyS.GainMapHDRConvertorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GainMapHDRConvertor.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GainMapHDRConvertor";
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		ECE38AFA2E853A88009CE6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T84X5VQX2Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = HyS.GainMapHDRConvertorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = GainMapHDRConvertor;
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		ECE38AFB2E853A88009CE6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T84X5VQX2Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = HyS.GainMapHDRConvertorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = GainMapHDRConvertor;
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -325,6 +796,33 @@
 			buildConfigurations = (
 				09AE6D9A2CA6D3B40032A81C /* Debug */,
 				09AE6D9B2CA6D3B40032A81C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECE38AFD2E853A88009CE6D7 /* Build configuration list for PBXNativeTarget "GainMapHDRConvertor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECE38AF62E853A88009CE6D7 /* Debug */,
+				ECE38AF72E853A88009CE6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECE38AFE2E853A88009CE6D7 /* Build configuration list for PBXNativeTarget "GainMapHDRConvertorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECE38AF82E853A88009CE6D7 /* Debug */,
+				ECE38AF92E853A88009CE6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECE38AFF2E853A88009CE6D7 /* Build configuration list for PBXNativeTarget "GainMapHDRConvertorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECE38AFA2E853A88009CE6D7 /* Debug */,
+				ECE38AFB2E853A88009CE6D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
