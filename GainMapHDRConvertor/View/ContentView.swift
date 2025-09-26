@@ -45,7 +45,7 @@ struct ContentView: View {
         .frame(minWidth: 800, minHeight: 600)
         .fileImporter(
             isPresented: $showingFilePicker,
-            allowedContentTypes: [.heic, .jpeg, .png, .tiff],
+            allowedContentTypes: UTType.allHDRImageFormats,
             allowsMultipleSelection: true
         ) { result in
             handleFileImport(result)

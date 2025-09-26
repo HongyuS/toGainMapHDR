@@ -79,7 +79,7 @@ struct FileListView: View {
         .frame(minWidth: 300, idealWidth: 350)
         .fileImporter(
             isPresented: $showingFileImporter,
-            allowedContentTypes: [.heic, .jpeg, .png, .tiff],
+            allowedContentTypes: UTType.allHDRImageFormats,
             allowsMultipleSelection: true
         ) { result in
             switch result {

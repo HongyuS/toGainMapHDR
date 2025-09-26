@@ -272,7 +272,7 @@ struct BaseImageSelector: View {
         }
         .fileImporter(
             isPresented: $showingFileImporter,
-            allowedContentTypes: [.heic, .jpeg, .png, .tiff],
+            allowedContentTypes: UTType.allHDRImageFormats,
             allowsMultipleSelection: false
         ) { result in
             switch result {
