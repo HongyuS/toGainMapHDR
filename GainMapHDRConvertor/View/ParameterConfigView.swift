@@ -14,22 +14,18 @@ struct ParameterConfigView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // 参数配置区域
-            VStack(alignment: .leading, spacing: 24) {
-                // 常规参数
-                RegularParametersSection(conversionOptions: conversionOptions)
-                
-                // 高级参数
-                AdvancedParametersSection(conversionOptions: conversionOptions)
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 24) {
+                    // 常规参数
+                    RegularParametersSection(conversionOptions: conversionOptions)
+                    
+                    // 高级参数
+                    AdvancedParametersSection(conversionOptions: conversionOptions)
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 16)
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 16)
             
-            // 底部警告信息
-            if !conversionOptions.warnings.isEmpty {
-                Divider()
-                WarningsSection(warnings: conversionOptions.warnings)
-            }
-
             // 底栏
             HStack {
                 Spacer()
@@ -71,13 +67,9 @@ struct RegularParametersSection: View {
                         .fontWeight(.medium)
                     
                     Picker("格式", selection: $conversionOptions.options.exportFormat) {
-                        Text("自适应增益图 (默认)").tag(ExportFormat.adaptive)
-                        Text("RGB增益图 (需要基础图像)").tag(ExportFormat.rgbGainMap)
-                        Text("Apple增益图 (CIFilter生成)").tag(ExportFormat.appleType1)
-                        Text("Apple增益图 (ISO转换)").tag(ExportFormat.appleType2)
-                        Text("SDR图像").tag(ExportFormat.sdr)
-                        Text("PQ HDR图像").tag(ExportFormat.pqHDR)
-                        Text("HLG HDR图像").tag(ExportFormat.hlgHDR)
+                        ForEach(conversionOptions.availableExportFormats, id: \.self) { format in
+                            Text(exportFormatDisplayName(format)).tag(format)
+                        }
                     }
                     .pickerStyle(MenuPickerStyle())
                     
@@ -138,7 +130,7 @@ struct RegularParametersSection: View {
                             .font(.caption)
                             .fontWeight(.medium)
                         
-                        Slider(value: $conversionOptions.options.imageQuality, in: 0.1...1.0, step: 0.05) {
+                        Slider(value: $conversionOptions.options.imageQuality, in: 0.1...1.0, step: 0.01) {
                             Text("质量")
                         } minimumValueLabel: {
                             Text("10%").font(.caption)
@@ -163,22 +155,41 @@ struct RegularParametersSection: View {
         }
     }
     
+    private func exportFormatDisplayName(_ format: ExportFormat) -> String {
+        switch format {
+        case .adaptive:
+            return "自适应增益图"
+        case .rgbGainMap:
+            return "RGB 增益图"
+        case .appleType1:
+            return "Apple 增益图 (CIFilter)"
+        case .appleType2:
+            return "Apple 增益图 (ISO)"
+        case .sdr:
+            return "SDR 图像"
+        case .pqHDR:
+            return "PQ HDR 图像"
+        case .hlgHDR:
+            return "HLG HDR 图像"
+        }
+    }
+    
     private func exportFormatDescription(_ format: ExportFormat) -> String {
         switch format {
         case .adaptive:
-            return "自适应增益图 (默认，ISO标准)"
+            return "自适应增益图 (默认，ISO 标准)"
         case .rgbGainMap:
-            return "RGB增益图 (需要指定基础图像)"
+            return "RGB 增益图 (需要指定基础图像)"
         case .appleType1:
-            return "Apple增益图 (使用CIFilter生成)"
+            return "Apple 增益图 (使用 CIFilter 生成)"
         case .appleType2:
-            return "Apple增益图 (从ISO增益图转换)"
+            return "Apple 增益图 (从 ISO 增益图转换)"
         case .sdr:
-            return "SDR图像 (无HDR增益图)"
+            return "SDR 图像 (无 HDR 增益图)"
         case .pqHDR:
-            return "PQ HDR图像 (强制10位)"
+            return "PQ HDR 图像 (强制10位)"
         case .hlgHDR:
-            return "HLG HDR图像"
+            return "HLG HDR 图像"
         }
     }
 }
@@ -195,6 +206,7 @@ struct AdvancedParametersSection: View {
                     Text("色调映射比例: \(String(format: "%.2f", conversionOptions.options.toneMappingRatio))")
                         .font(.subheadline)
                         .fontWeight(.medium)
+                        .foregroundColor(conversionOptions.isToneMappingDisabled ? .secondary : .primary)
                     
                     Slider(value: Binding(
                         get: { Double(conversionOptions.options.toneMappingRatio) },
@@ -206,10 +218,17 @@ struct AdvancedParametersSection: View {
                     } maximumValueLabel: {
                         Text("1").font(.caption)
                     }
+                    .disabled(conversionOptions.isToneMappingDisabled)
                     
-                    Text("0: 保留完整高光细节, 1: 硬截取SDR范围外部分")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    if conversionOptions.isToneMappingDisabled {
+                        Text(conversionOptions.toneMappingDisableReason)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text("0: 保留完整高光细节, 1: 硬截取SDR范围外部分")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
                 
                 // 增益图缩放（仅Apple格式）
@@ -218,6 +237,7 @@ struct AdvancedParametersSection: View {
                         Text("增益图缩放: \(String(format: "%.1fx", conversionOptions.options.scalingRatio))")
                             .font(.subheadline)
                             .fontWeight(.medium)
+                            .foregroundColor(conversionOptions.isScalingDisabled ? .secondary : .primary)
                         
                         Slider(value: Binding(
                             get: { Double(conversionOptions.options.scalingRatio) },
@@ -229,10 +249,17 @@ struct AdvancedParametersSection: View {
                         } maximumValueLabel: {
                             Text("2.0x").font(.caption)
                         }
+                        .disabled(conversionOptions.isScalingDisabled)
                         
-                        Text("1.0: 完整尺寸, 2.0: 半尺寸增益图")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                        if conversionOptions.isScalingDisabled {
+                            Text(conversionOptions.scalingDisableReason)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        } else {
+                            Text("1.0: 完整尺寸, 2.0: 半尺寸增益图")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
                 
@@ -282,34 +309,6 @@ struct BaseImageSelector: View {
                 print("基础图像选择失败: \(error.localizedDescription)")
             }
         }
-    }
-}
-
-// MARK: - 警告区域
-struct WarningsSection: View {
-    let warnings: [String]
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Image(systemName: "exclamationmark.triangle")
-                    .foregroundColor(.orange)
-                Text("注意事项")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundColor(.orange)
-                Spacer()
-            }
-            
-            ForEach(warnings, id: \.self) { warning in
-                Text("• \(warning)")
-                    .font(.caption)
-                    .foregroundColor(.orange)
-            }
-        }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 12)
-        .background(Color.orange.opacity(0.1))
     }
 }
 

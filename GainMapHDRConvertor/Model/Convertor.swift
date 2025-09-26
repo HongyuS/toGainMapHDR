@@ -13,7 +13,7 @@ import SwiftUI
 import Combine
 
 // MARK: - Export Format Enums
-enum ExportFormat {
+enum ExportFormat: CaseIterable {
     case adaptive       // 默认格式 - adaptive gain map
     case rgbGainMap     // -b: RGB gain map with base image
     case appleType1     // -g: Apple gain map by CIFilter
@@ -117,7 +117,6 @@ struct ConversionOptions: Equatable {
         return scalingRatio > 1.0
     }
     
-    // 验证参数有效性并考虑相互约束
     var isValid: (Bool, String?) {
         if imageQuality < 0.0 || imageQuality > 1.0 {
             return (false, "图像质量必须在 0.0 到 1.0 之间")
@@ -149,36 +148,10 @@ struct ConversionOptions: Equatable {
             colorDepth = .tenBit
         }
         
-        // JPEG 不能输出 HDR
+        // JPEG 不能输出 HDR，自动切换到适配格式
         if fileFormat == .jpeg && (exportFormat == .hlgHDR || exportFormat == .pqHDR) {
             exportFormat = .adaptive // 回退到默认格式
         }
-    }
-    
-    // 获取警告信息
-    var warnings: [String] {
-        var warnings: [String] = []
-        
-        if exportFormat == .hlgHDR && colorDepth == .eightBit {
-            warnings.append("建议使用 10 位色彩深度与 HLG")
-        }
-        if fileFormat == .jpeg && colorDepth == .tenBit {
-            warnings.append("JPEG 格式导出时色彩深度将为 8 位")
-        }
-        if exportFormat == .pqHDR && colorDepth == .eightBit {
-            warnings.append("PQ HDR 导出时色彩深度将为 10 位")
-        }
-        if exportFormat == .rgbGainMap && baseImageURL != nil {
-            warnings.append("指定了基础图像，色调映射比例将不会应用")
-        }
-        if (exportFormat == .hlgHDR || exportFormat == .pqHDR) {
-            warnings.append("HDR 导出时色调映射比例将不会应用")
-        }
-        if scalingRatio > 1.0 && exportFormat != .appleType1 && exportFormat != .appleType2 {
-            warnings.append("只有 Apple 增益图格式支持半尺寸增益图")
-        }
-        
-        return warnings
     }
 }
 
@@ -234,12 +207,6 @@ class Convertor: ObservableObject {
             let validation = options.isValid
             if !validation.0 {
                 return .failure(.invalidParameters(validation.1!))
-            }
-            
-            // 显示警告
-            let warnings = options.warnings
-            if !warnings.isEmpty {
-                print("警告: \(warnings.joined(separator: "; "))")
             }
             
             // 加载 HDR 图像
